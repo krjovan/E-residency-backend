@@ -1,38 +1,43 @@
-const mongoose = require('mongoose');
+var mongoose = require( 'mongoose' );
+var crypto = require('crypto');
+var jwt = require('jsonwebtoken');
 
-//Tabela, odnosno atributi, tip podataka i ostale gluposti
-const UsersSchema = mongoose.Schema({
-    name: { type: String, default: "noname", required: true },
+var userSchema = new mongoose.Schema({
+  email: {
+    type: String,
+    unique: true,
+    required: true
+  },
+  name: {
+    type: String,
+    required: true
+  },
+  role:{type:String, enum: ['admin','user'],default:'user'},
+  hash: String,
+  salt: String
 });
 
+userSchema.methods.setPassword = function(password){
+  this.salt = crypto.randomBytes(16).toString('hex');
+  this.hash = crypto.pbkdf2Sync(password, this.salt, 1000, 64, 'sha512').toString('hex');
+};
 
+userSchema.methods.validPassword = function(password) {
+  var hash = crypto.pbkdf2Sync(password, this.salt, 1000, 64, 'sha512').toString('hex');
+  return this.hash === hash;
+};
 
-//OVO USER pod navodnicima je pod kojim ce se imenom ta tabela cuvat u bazi, plus eksoprtujemo sve
-const User = module.exports = mongoose.model('User', UsersSchema);
+userSchema.methods.generateJwt = function() {
+  var expiry = new Date();
+  expiry.setDate(expiry.getDate() + 7);
 
+  return jwt.sign({
+    _id: this._id,
+    email: this.email,
+    name: this.name,
+    role:this.role,
+    exp: parseInt(expiry.getTime() / 1000),
+  }, "MY_SECRET");
+};
 
-//Krud operacije nad Tabelom pomocu biblioteke koju smo ucitali mongoose
-module.exports.addUser = function (user, callback) {
-    user.save(callback);
-}
-
-module.exports.saveUser = function (user, callback) {
-    var query = {
-        _id: user._id
-    };
-    User.findOneAndUpdate(query, user, callback);
-}
-
-module.exports.getUserById = function (id, callback) {
-    User.findById(id, callback);
-}
-
-module.exports.geAll = function (callback) {
-    User.find({}, callback);
-}
-
-module.exports.removeUser = function (id, callback) {
-    User.findById(id, (err, user) => {
-        user.remove(callback);
-    });
-}
+const User = module.exports = mongoose.model('User', userSchema);

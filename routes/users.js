@@ -1,54 +1,50 @@
-const express = require('express');
-const router = express.Router();
-let User = require('../models/users');
-
-
-//NIS PAMETNO SAMO CRUD OPERACIJE
-
-
-router.post('/add', (req, res, next) => {
-    let user = new User(req.body);
-    User.addUser(user, (err) => {
-        if (err)
-            return res.status(500).send("Server error!");
-        return res.status(201).send("User saved!");
-    });
-});
-
-router.patch('/edit', (req, res, next) => {
-    let user = new User(req.body);
-    User.saveUser(user, (err,data) => {
-        if (err)
-            return res.status(500).send("Server error!");
-        return res.status(201).json(data);
-    });
+var express = require('express');
+var router = express.Router();
+var jwt = require('express-jwt');
+const User = require('../models/users');
+const multer = require('multer');
+const path=require('path');
+var auth = jwt({
+  secret: 'MY_SECRET',
+  userProperty: 'payload',
+  algorithms: ['RS256']
 });
 
 
-router.get('/view/:id', (req, res, next) => {
-    User.getUserById(req.params.id.toString(), (err, user) => {
-        if (err)
-            return res.status(500).send("Server error!");
-        if (!user)
-            return res.status(422).send("User not found");
-        return res.status(200).json(user);;
-    });
-});
+var ctrlProfile = require('../controllers/profile');
+var ctrlAuth = require('../controllers/authentication');
 
-router.get('/all', (req, res, next) => {
-    User.geAll((err, users) => {
-        if (err)
-            return res.status(500).send("Server error!");
-        return res.status(200).json(users);
-    });
-});
+// profile
+router.get('/profile', auth, ctrlProfile.profileRead);
 
-router.delete('/delete/:id', (req, res, next) => {
-    User.removeUser(req.params.id.toString(), (err) => {
-        if (err)
-            return res.status(500).send("Server error!");
-        return res.status(204).send("User removed!");
+// authentication
+router.post('/register', ctrlAuth.register);
+router.post('/login', ctrlAuth.login);
+
+
+//retreving data from database
+router.get('/users',(req,res,next)=>{
+    User.find(function(err,users){
+        if(err){
+            res.json(err);
+        }
+        else{
+            res.json(users);
+        }
     });
-});
+  });
+
+
+router.delete('/user/:id',(req,res,next)=>{
+    User.remove({_id: req.params.id},function(err, result){
+        if(err){
+            res.json(err);
+        }
+        else{
+            res.json(result);
+        }
+    });
+  });
+
 
 module.exports = router;
