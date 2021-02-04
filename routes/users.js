@@ -7,7 +7,7 @@ const path=require('path');
 var auth = jwt({
   secret: 'MY_SECRET',
   userProperty: 'payload',
-  algorithms: ['RS256']
+  algorithms: ['HS256']
 });
 
 
@@ -23,7 +23,7 @@ router.post('/login', ctrlAuth.login);
 
 
 //retreving data from database
-router.get('/users',(req,res,next)=>{
+router.get('/all',(req,res,next)=>{
     User.find(function(err,users){
         if(err){
             res.json(err);
@@ -35,7 +35,7 @@ router.get('/users',(req,res,next)=>{
   });
 
 
-router.delete('/user/:id',(req,res,next)=>{
+router.delete('/delete/:id',(req,res,next)=>{
     User.remove({_id: req.params.id},function(err, result){
         if(err){
             res.json(err);
