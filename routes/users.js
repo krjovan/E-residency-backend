@@ -31,5 +31,8 @@ router.put('/admin/update/:id', ctrlUser.updateUserByAdmin);
 router.post('/hash', ctrlUser.getHash);
 router.delete('/delete/:id', ctrlUser.deleteUser);
 
+//reset password
+router.put('/resetPassword', ctrlUser.resetPassword);
+
 
 module.exports = router;
