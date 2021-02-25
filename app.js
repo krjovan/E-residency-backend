@@ -13,6 +13,7 @@ var passport = require('passport');
 //ucitavamo servise
 const users=require('./routes/users');
 const status=require('./routes/status');
+const location = require('./routes/location');
 
 
 const app=express();
@@ -42,7 +43,7 @@ app.use(bodyParser.json());
 //navodimo nasted putanje iz servisa
 app.use('/users',users);
 app.use('/status',status);
-
+app.use('/location',location);
 
 
 app.get('**',(req,res)=>{
