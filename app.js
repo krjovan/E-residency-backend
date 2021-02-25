@@ -12,6 +12,8 @@ var passport = require('passport');
 
 //ucitavamo servise
 const users=require('./routes/users');
+const status=require('./routes/status');
+
 
 const app=express();
 //konektujemo se na bazu
@@ -39,6 +41,8 @@ app.use(bodyParser.json());
 
 //navodimo nasted putanje iz servisa
 app.use('/users',users);
+app.use('/status',status);
+
 
 
 app.get('**',(req,res)=>{
