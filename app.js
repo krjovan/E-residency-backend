@@ -14,9 +14,12 @@ var passport = require('passport');
 const users=require('./routes/users');
 const status=require('./routes/status');
 const location = require('./routes/location');
+const application = require('./routes/application');
+
 
 
 const app=express();
+process.env.TZ = 'Europe/Belgrade';
 //konektujemo se na bazu
 mongoose.connect(config.database,{ useNewUrlParser: true , useUnifiedTopology: true });
 mongoose.connection.on('connected',()=>{
@@ -44,12 +47,13 @@ app.use(bodyParser.json());
 app.use('/users',users);
 app.use('/status',status);
 app.use('/location',location);
+app.use('/application',application);
+
 
 
 app.get('**',(req,res)=>{
     res.sendFile(__dirname+'/public/index.html');
 });
-
 
 //startujemo server na portu 8080
 const port= process.env.PORT || 8080;
