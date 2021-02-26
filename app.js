@@ -15,7 +15,7 @@ const users=require('./routes/users');
 const status=require('./routes/status');
 const location = require('./routes/location');
 const application = require('./routes/application');
-
+const details = require('./routes/details');
 
 
 const app=express();
@@ -48,7 +48,7 @@ app.use('/users',users);
 app.use('/status',status);
 app.use('/location',location);
 app.use('/application',application);
-
+app.use('/details',details);
 
 
 app.get('**',(req,res)=>{

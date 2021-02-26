@@ -31,11 +31,13 @@ module.exports.addApplication = function(req, res) {
 	application.motivation = req.body.motivation;
 	application.user_id = req.body.user_id;
 
-	res.status(200);
-	res.json({
-		"message" : "Application created successfully"
+	
+	application.save(function(err,result) {
+		res.status(200);
+		res.json({
+			"application_id" : result.id
+		});
 	});
-	application.save();
 };
 
 module.exports.deleteApplication = function(req, res) {
