@@ -6,6 +6,7 @@ var sendJSONresponse = function(res, status, content) {
   res.json(content);
 };
 
+
 module.exports.getAll = function(req, res) {
 	Details.find()
 	.sort({ _id: -1 })
