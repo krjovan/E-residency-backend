@@ -38,7 +38,7 @@ var detailsSchema = new mongoose.Schema({
     required: true
   },
   application_id: {
-    type: String,
+    type: mongoose.Schema.Types.ObjectId,
     required: true
   }
 });

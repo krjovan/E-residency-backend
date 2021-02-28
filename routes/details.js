@@ -42,4 +42,6 @@ router.get('/all', ctrlDetails.getAll);
 router.post('/add',	upload.single('uploadedImage'), ctrlDetails.addDetails);
 router.delete('/delete/:id', ctrlDetails.deleteDetails);
 
+router.get('/allWithApplication', ctrlDetails.getApplicationWithDetails);
+
 module.exports = router;

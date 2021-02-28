@@ -17,6 +17,28 @@ module.exports.getAll = function(req, res) {
     });
 };
 
+module.exports.getApplicationWithDetails = function(req, res) {
+	Details.aggregate([
+		{
+			$lookup:
+			{
+				from: "applications",
+				localField: "application_id",
+				foreignField: "_id",
+				as: "application"
+			}
+		},
+		{ $unwind : "$application" }
+	]).exec( (err, list) => {
+        if (err) throw err;
+        console.log(list);
+		res.status(200);
+		res.json(list);
+    }); 
+
+	
+};
+
 module.exports.addDetails = function(req, res) {
 
 	if(!req.body.given_name || !req.body.surname || !req.body.country_of_birth || !req.body.citizenship || !req.body.date_of_birth || 
