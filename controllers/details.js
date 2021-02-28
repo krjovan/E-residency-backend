@@ -18,6 +18,7 @@ module.exports.getAll = function(req, res) {
 };
 
 module.exports.addDetails = function(req, res) {
+
 	if(!req.body.given_name || !req.body.surname || !req.body.country_of_birth || !req.body.citizenship || !req.body.date_of_birth || 
 		!req.body.sex || !req.body.personal_identification_code || !req.body.pick_up_location_id || !req.body.application_id) {
 		sendJSONresponse(res, 400, {
@@ -25,8 +26,14 @@ module.exports.addDetails = function(req, res) {
 		});
 		return;
 	}
+	const file = req.file
 
-
+    if (!file) {
+        const error = new Error('Please upload a file')
+        error.httpStatusCode = 400
+        return next(error)
+    }
+	
 	var details = new Details();
 
 	details.given_name = req.body.given_name;
@@ -38,13 +45,13 @@ module.exports.addDetails = function(req, res) {
 	details.personal_identification_code = req.body.personal_identification_code;
 	details.pick_up_location_id = req.body.pick_up_location_id;
 	details.application_id = req.body.application_id;
+	details.photo_code = 'http://localhost:8080/images/' + req.file.filename;
+	details.save();
 	
 	res.status(200);
 	res.json({
 		"message" : "Details created successfully"
 	});
-	details.save();
-
 };
 
 module.exports.deleteDetails = function(req, res) {
