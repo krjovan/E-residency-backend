@@ -41,6 +41,34 @@ module.exports.getApplicationWithDetails = function(req, res) {
 	
 };
 
+
+module.exports.getApplicationWithDetailsById = function(req, res) {
+	var id = mongoose.Types.ObjectId(req.params.id);
+	Details.aggregate([
+		{   
+			$match: {
+				application_id: id
+			}
+		},
+		{
+			$lookup:
+			{
+				from: "locations",
+				localField: "pick_up_location_id",
+				foreignField: "_id",
+				as: "location"
+			}
+		},
+		{ $unwind : "$location" }
+	]).exec( (err, list) => {
+        if (err) throw err;
+		res.status(200);
+		res.json(list[0]);
+    }); 
+
+	
+};
+
 module.exports.addDetails = function(req, res) {
 
 	if(!req.body.given_name || !req.body.surname || !req.body.country_of_birth || !req.body.citizenship || !req.body.date_of_birth || 

@@ -39,6 +39,7 @@ var ctrlDetails = require('../controllers/details');
 
 //retreving data from database
 router.get('/all', ctrlDetails.getAll);
+router.get('/getApplicationDetailsById/:id', ctrlDetails.getApplicationWithDetailsById);
 router.post('/add',	upload.single('uploadedImage'), ctrlDetails.addDetails);
 router.delete('/delete/:id', ctrlDetails.deleteDetails);
 
