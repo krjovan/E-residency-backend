@@ -1,5 +1,7 @@
 var mongoose = require('mongoose');
 var Details = mongoose.model('Details');
+var Status = mongoose.model('Status');
+var Application_status = require('../models/application_status');
 
 var sendJSONresponse = function(res, status, content) {
   res.status(status);
@@ -69,6 +71,14 @@ module.exports.addDetails = function(req, res) {
 	details.application_id = req.body.application_id;
 	details.photo_code = 'http://localhost:8080/images/' + req.file.filename;
 	details.save();
+	
+	var applicationStatus = new Application_status();
+	
+	Status.findOne({status_type: 'submitted'}, function(err, doc) {
+		applicationStatus.application_id = req.body.application_id;
+		applicationStatus.status_id = doc._id;
+		applicationStatus.save();
+	});
 	
 	res.status(200);
 	res.json({

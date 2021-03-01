@@ -13,6 +13,7 @@ const status=require('./routes/status');
 const location = require('./routes/location');
 const application = require('./routes/application');
 const details = require('./routes/details');
+const application_status = require('./routes/application_status');
 
 
 const app=express();
@@ -41,7 +42,7 @@ app.use('/status',status);
 app.use('/location',location);
 app.use('/application',application);
 app.use('/details',details);
-
+app.use('/application-status',application_status);
 
 const port= process.env.PORT || 8080;
 app.listen(port,()=>{
