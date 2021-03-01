@@ -8,7 +8,7 @@ var ctrlApplication = require('../controllers/application');
 
 //retreving data from database
 router.get('/all', ctrlApplication.getAll);
-//router.get('/withPagination', ctrlApplication.getLocationsByPagination);
+router.get('/userApplications/:id', ctrlApplication.getUserApplications);
 //router.get('/numberOfLocations', ctrlApplication.numberOfLocations);
 router.post('/add', ctrlApplication.addApplication);
 //router.put('/update/:id', ctrlApplication.updateLocation);

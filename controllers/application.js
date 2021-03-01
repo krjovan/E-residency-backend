@@ -17,6 +17,23 @@ module.exports.getAll = function(req, res) {
     });
 };
 
+
+module.exports.getUserApplications = function(req, res) {
+	var id = mongoose.Types.ObjectId(req.params.id);
+	Application.aggregate([
+		{   
+			$match: {
+				user_id: id
+			}
+		},
+		{ $sort : { _id: -1 } }
+	]).exec( (err, list) => {
+        if (err) throw err;
+		res.status(200);
+		res.json(list);
+    }); 
+};
+
 module.exports.addApplication = function(req, res) {
 	if(!req.body.type_of_application || !req.body.motivation || !req.body.user_id) {
 		sendJSONresponse(res, 400, {
