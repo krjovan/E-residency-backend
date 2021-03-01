@@ -15,7 +15,7 @@ var applicationSchema = new mongoose.Schema({
     required: false
   },
   user_id: {
-    type: String,
+    type: mongoose.Schema.Types.ObjectId,
     required: true
   }
 });

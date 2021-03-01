@@ -34,7 +34,7 @@ var detailsSchema = new mongoose.Schema({
     required: false
   },
   pick_up_location_id: {
-    type: String,
+    type: mongoose.Schema.Types.ObjectId,
     required: true
   },
   application_id: {
