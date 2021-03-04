@@ -28,7 +28,8 @@ module.exports.getStatusByApplicationId = function(req, res) {
 				foreignField: "_id",
 				as: "status"
 			}
-		}
+		},
+		{ $unwind : "$status" }
 	]).exec( (err, list) => {
         if (err) throw err;
         console.log(list);
