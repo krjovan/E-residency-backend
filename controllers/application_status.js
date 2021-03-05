@@ -3,6 +3,11 @@ var Application_status = mongoose.model('Application_status');
 var Status = mongoose.model('Status');
 var Application = mongoose.model('Application');
 
+var sendJSONresponse = function(res, status, content) {
+  res.status(status);
+  res.json(content);
+};
+
 module.exports.getAll = function(req, res) {
 	Application_status.find()
 	.sort({ _id: -1 })
@@ -113,13 +118,15 @@ module.exports.getProcessingApplications = function(req, res) {
 
 
 module.exports.getApplicationsByStatusType = function(req, res) {
-	if(!req.body.status_type) {
+	
+	console.log(req.query.status_type);
+	if(!req.query.status_type) {
 		sendJSONresponse(res, 400, {
 		  "message": "All fields required"
 		});
 		return;
 	}
-	Status.findOne({status_type: req.body.status_type}, function(err, status) {
+	Status.findOne({status_type: req.query.status_type}, function(err, status) {
 		Application_status.aggregate([
 		{   
 			$match: {
@@ -142,28 +149,6 @@ module.exports.getApplicationsByStatusType = function(req, res) {
 			res.json(list);
 		}); 
 	});
-	/*
-	Application_status.aggregate([
-		{   
-			$match: {
-				application_id: id
-			}
-		},
-		{
-			$lookup:
-			{
-				from: "status",
-				localField: "status_id",
-				foreignField: "_id",
-				as: "status"
-			}
-		}
-	]).exec( (err, list) => {
-        if (err) throw err;
-        console.log(list);
-		res.status(200);
-		res.json(list);
-    }); */
 };
 
 module.exports.addApplicationStatus = function(req, res) {

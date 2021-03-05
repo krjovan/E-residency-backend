@@ -6,137 +6,813 @@
 	},
 	"item": [
 		{
-			"name": "USERS ALL",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "localhost:8080/users/all",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"users",
-						"all"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "USER REGISTER",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"Marko Marković\",\r\n    \"email\": \"marko@gmail.com\",\r\n    \"password\": \"Marko123\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
+			"name": "Users",
+			"item": [
+				{
+					"name": "USERS ALL",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/users/all",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users",
+								"all"
+							]
 						}
-					}
-				},
-				"url": {
-					"raw": "localhost:8080/users/register",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"users",
-						"register"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "USER LOGIN",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"email\": \"marko@gmail.com\",\r\n    \"password\": \"Marko123\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "localhost:8080/users/login",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"users",
-						"login"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "USER DELETE",
-			"request": {
-				"method": "DELETE",
-				"header": [],
-				"url": {
-					"raw": "localhost:8080/users/delete/601b4cf3f766a730c09fc6fa",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"users",
-						"delete",
-						"601b4cf3f766a730c09fc6fa"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "USER PROFILE",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "GET",
-				"header": [
-					{
-						"key": "Authorization",
-						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDFiMmVmOTMzMTQ3MjFmMjg4M2Q5ZjMiLCJlbWFpbCI6Im5pa29sYUBnbWFpbC5jb20iLCJuYW1lIjoiTmlrb2xhIE5pa29saWMiLCJyb2xlIjoidXNlciIsImV4cCI6MTYxMzAwNjgwNywiaWF0IjoxNjEyNDAyMDA3fQ.gJfy7iR0KdJo9JVm67RX_GWQ0L4iiAJ437InWwlUpW4",
-						"type": "text"
 					},
-					{
-						"key": "",
-						"value": "",
-						"type": "text",
-						"disabled": true
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": ""
+					"response": []
 				},
-				"url": {
-					"raw": "localhost:8080/users/profile",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"users",
-						"profile"
-					]
+				{
+					"name": "USER REGISTER",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Marko Marković\",\r\n    \"email\": \"marko@gmail.com\",\r\n    \"password\": \"Marko123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/users/register",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "USER LOGIN",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"kul@gmail.com\",\r\n    \"password\": \"kul123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/users/login",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "USER DELETE",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/users/delete/6028020d6ffeba2aacbfd676",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users",
+								"delete",
+								"6028020d6ffeba2aacbfd676"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "USER PROFILE",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDIxZTUzMTVjYWZkMDFiMTRjMDcxNDAiLCJlbWFpbCI6Im1hcmtvQGdtYWlsLmNvbSIsIm5hbWUiOiJNYXJrbyBNYXJrb3ZpxIciLCJyb2xlIjoidXNlciIsImV4cCI6MTYxMzQzODg5NywiaWF0IjoxNjEyODM0MDk3fQ.vQm3_lBR1YFX2nA9fJmtVEgNNkAEDz-yujVh-p1JF9E",
+								"type": "text"
+							},
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "localhost:8080/users/profile",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users",
+								"profile"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "USER UPDATE",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"role\": \"user\",\r\n    \"newPassword\": \"kul123\",\r\n    \"name\": \"Test testic\",\r\n    \"email\": \"kul@gmail.com\",\r\n    \"salt\": \"f51579104a055345fbc8840a12406735\",\r\n    \"hash\": \"d56bd8c0ceaafc01b4d2b3f5a15ccb0422f8072e0eaf34b2a40e368831d959188f30990702c15a40b1c42bb9d39c3f2cc1fe704304459a4873e8d56a0f043c14\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/users/update/6021e5315cafd01b14c07140",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users",
+								"update",
+								"6021e5315cafd01b14c07140"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "USER HASH",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"currentPassword\": \"kul123\",\r\n    \"salt\": \"f51579104a055345fbc8840a12406735\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/users/hash",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users",
+								"hash"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "USERS WITH PAGINATION",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/users/withPagination?page=0&limit=4",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users",
+								"withPagination"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "limit",
+									"value": "4"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "USER COUNT",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/users/numberOfUsers",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users",
+								"numberOfUsers"
+							]
+						}
+					},
+					"response": []
 				}
-			},
-			"response": []
+			]
+		},
+		{
+			"name": "Status",
+			"item": [
+				{
+					"name": "STATUS ALL",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/status/all",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"status",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "STATUS ADD",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"status_type\": \"submitted\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/status/add",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"status",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "STATUS DELETE",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/status/delete/6037795ba67dad0eb0ad4a04",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"status",
+								"delete",
+								"6037795ba67dad0eb0ad4a04"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Location",
+			"item": [
+				{
+					"name": "LOCATION ALL",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/location/all?search=ser",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"location",
+								"all"
+							],
+							"query": [
+								{
+									"key": "search",
+									"value": "ser"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "LOCATION ADD",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"country\": \"Serbia\",\r\n    \"city\": \"Belgrade\",\r\n    \"street\": \"John F. Kennedy\",\r\n    \"street_number\": \"36\",\r\n    \"contact_email\": \"belgrade@eresidency.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/location/add",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"location",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "LOCATION UPDATE",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"country\": \"Serbia\",\r\n    \"city\": \"Belgrade\",\r\n    \"street\": \"John F. Kenedy\",\r\n    \"street_number\": \"23\",\r\n    \"contact_email\": \"belgrade@eresidency.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/location/update/6037f1f21d709d26245e7c50",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"location",
+								"update",
+								"6037f1f21d709d26245e7c50"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "LOCATION DELETE",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/location/delete/6037f14b1d709d26245e7c4f",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"location",
+								"delete",
+								"6037f14b1d709d26245e7c4f"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "LOCATION COUNT",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/location/numberOfLocations",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"location",
+								"numberOfLocations"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "LOCATION WITH PAGINATION",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/location/withPagination?page=2&limit=2",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"location",
+								"withPagination"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "2"
+								},
+								{
+									"key": "limit",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Application",
+			"item": [
+				{
+					"name": "APPLICATION ALL",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/application/all",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"application",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "APPLICATION ADD",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"type_of_application\": \"Some type\",\r\n    \"motivation\": \"Some motivation\",\r\n    \"user_id\": \"154wd4e6rse6r41er3e31r315e48er\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/application/add",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"application",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "APPLICATION DELETE",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/application/delete/603d15f240285d2508b55b2e",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"application",
+								"delete",
+								"603d15f240285d2508b55b2e"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Details",
+			"item": [
+				{
+					"name": "DETAILS ALL",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/details/all",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"details",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DETAILS ADD",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"given_name\": \"Sima\",\r\n    \"surname\": \"Simic\",\r\n    \"country_of_birth\": \"Serbia\",\r\n    \"citizenship\": \"Serbien\",\r\n    \"date_of_birth\": \"1990-04-04T00:00:00\",\r\n    \"sex\": \"M\",\r\n    \"personal_identification_code\": \"0404990750469\",\r\n    \"pick_up_location_id\": \"adwihk540w97dw6a6w464wad\",\r\n    \"application_id\": \"djaad4s648ad6das648a6\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/details/add",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"details",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DETAILS DELETE",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/details/delete/603d15f240285d2508b55b2f",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"details",
+								"delete",
+								"603d15f240285d2508b55b2f"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DETAILS IMAGE",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/images/uploadedImage-1614542644197.jpeg",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"images",
+								"uploadedImage-1614542644197.jpeg"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DETAILS WITH APPLICATION",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/details/allWithApplication",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"details",
+								"allWithApplication"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Application Status",
+			"item": [
+				{
+					"name": "APPLICATION STATUS ALL",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/application-status/all",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"application-status",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "STATUS OF APPLICATION",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/application-status/getStatusByApplicationId/60400b9e4cc37c27fcae7147",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"application-status",
+								"getStatusByApplicationId",
+								"60400b9e4cc37c27fcae7147"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "APPLICATION STATUS ADD",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"application_id\": \"603d1c7b4ded26081040c442\",\r\n    \"status_id\": \"60377b8ba67dad0eb0ad4a06\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/application-status/add",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"application-status",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "APPLICATION STATUS DELETE",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/application-status/delete/603d15f240285d2508b55b30",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"application-status",
+								"delete",
+								"603d15f240285d2508b55b30"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "APPLICATIONS BY STATUS TYPE",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/application-status/getApplicationsByStatusType/?status_type=accepted",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"application-status",
+								"getApplicationsByStatusType",
+								""
+							],
+							"query": [
+								{
+									"key": "status_type",
+									"value": "accepted"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "JUST SUBMITTED APPLICATIONS",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/application-status/getSubmittedApplications",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"application-status",
+								"getSubmittedApplications"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "JUST PROCESSING APPLICATIONS",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/application-status/getProcessingApplications",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"application-status",
+								"getProcessingApplications"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	]
 }
