@@ -7,6 +7,10 @@ var ctrlApplication_status = require('../controllers/application_status');
 router.get('/all', ctrlApplication_status.getAll);
 router.get('/getStatusByApplicationId/:id', ctrlApplication_status.getStatusByApplicationId);
 router.get('/getApplicationsByStatusType', ctrlApplication_status.getApplicationsByStatusType);
+
+router.get('/getSubmittedApplications', ctrlApplication_status.getSubmittedApplications);
+router.get('/getProcessingApplications', ctrlApplication_status.getProcessingApplications);
+
 router.post('/add', ctrlApplication_status.addApplicationStatus);
 router.delete('/delete/:id', ctrlApplication_status.deleteApplicationStatus);
 

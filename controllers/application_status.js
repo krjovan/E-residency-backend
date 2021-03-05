@@ -1,6 +1,7 @@
 var mongoose = require('mongoose');
 var Application_status = mongoose.model('Application_status');
 var Status = mongoose.model('Status');
+var Application = mongoose.model('Application');
 
 module.exports.getAll = function(req, res) {
 	Application_status.find()
@@ -36,6 +37,78 @@ module.exports.getStatusByApplicationId = function(req, res) {
 		res.status(200);
 		res.json(list);
     }); 
+};
+
+module.exports.getSubmittedApplications = function(req, res) {
+	Application_status.aggregate([
+		{
+			$group :
+				{
+					_id : {application_id:"$application_id"},
+					count: { $sum: 1 }
+				}
+		},
+		{
+			$lookup:
+			{
+				from: "applications",
+				localField: "_id.application_id",
+				foreignField: "_id",
+				as: "application"
+			}
+		},
+		{ $unwind : "$application" },
+		{
+			$match: { "count": 1 }
+		},
+		{
+			$project: {
+				'_id': 0,
+				'application': 1
+			}
+		},
+	
+	]).exec(function (err, doc) {
+		console.log(doc);
+        if(err) { res.status(500).json(err); return; };
+        res.status(200).json(doc);
+    });
+};
+
+module.exports.getProcessingApplications = function(req, res) {
+	Application_status.aggregate([
+		{
+			$group :
+				{
+					_id : {application_id:"$application_id"},
+					count: { $sum: 1 }
+				}
+		},
+		{
+			$lookup:
+			{
+				from: "applications",
+				localField: "_id.application_id",
+				foreignField: "_id",
+				as: "application"
+			}
+		},
+		{ $unwind : "$application" },
+		{
+			$match: { "count": 2 }
+		},
+		{
+			$project: {
+				'_id': 0,
+				'application': 1
+			}
+		},
+	
+	]).exec(function (err, doc) {
+		console.log(doc);
+        if(err) { res.status(500).json(err); return; };
+        res.status(200).json(doc);
+    });
 };
 
 
