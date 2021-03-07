@@ -153,23 +153,26 @@ module.exports.getApplicationsByStatusType = function(req, res) {
 
 module.exports.addApplicationStatus = function(req, res) {
 
-	if(!req.body.application_id || !req.body.status_id) {
+	if(!req.body.application_id || !req.body.status_type) {
 		sendJSONresponse(res, 400, {
 		  "message": "All fields required"
 		});
 		return;
 	}
 	
-	var applicationStatus = new Application_status();
+	Status.findOne({status_type: req.body.status_type}, function(err, status) {
+		var applicationStatus = new Application_status();
 	
-	applicationStatus.application_id = req.body.application_id;
-	applicationStatus.status_id = req.body.status_id;
-	applicationStatus.save();
-	
-	res.status(200);
-	res.json({
-		"message" : "Application status created successfully"
+		applicationStatus.application_id = req.body.application_id;
+		applicationStatus.status_id = status._id;
+		applicationStatus.save();
+		
+		res.status(200);
+		res.json({
+			"message" : "Application status created successfully"
+		});
 	});
+	
 };
 
 module.exports.deleteApplicationStatus = function(req, res) {
