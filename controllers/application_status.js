@@ -2,6 +2,8 @@ var mongoose = require('mongoose');
 var Application_status = mongoose.model('Application_status');
 var Status = mongoose.model('Status');
 var Application = mongoose.model('Application');
+var User = mongoose.model('User');
+var nodemailer = require('nodemailer');
 
 var sendJSONresponse = function(res, status, content) {
   res.status(status);
@@ -167,6 +169,125 @@ module.exports.addApplicationStatus = function(req, res) {
 		applicationStatus.status_id = status._id;
 		applicationStatus.save();
 		
+		let transport = nodemailer.createTransport({
+			host: 'smtp.mailtrap.io',
+			port: 2525,
+			auth: {
+			   user: '02231501925661',
+			   pass: '61cbb1dce65639'
+			}
+		});
+		
+		if (req.body.status_type === 'rejected') {
+			var application_id = mongoose.Types.ObjectId(req.body.application_id);
+			Application.findOne({_id: application_id}, function(err, application){
+				if(err) {
+					console.log(err);
+				}
+
+				if(application) {
+					var user_id = mongoose.Types.ObjectId(application.user_id);
+					User.findOne({_id: user_id}, function(err, user){
+						if(err) {
+						  console.log(err);
+						}
+						if(user) {
+							var mailOptions = {
+								from: 'no-reply@e-residency.com',
+								to: user.email,
+								subject: 'Rejected e-residency application',
+								html: `<p>Dear Sir or Madam,</p>
+									   <p>Your application for e-residency was rejected.</p>
+									   <p>Be free to apply again after 6 months.</p>
+									   <p>E-residency team</p>
+									   <p>Email: contact@e-residency.com</p>
+									   <p>Web: <a href="http://localhost:4200/home">www.e-residency.com</a></p>`
+							};
+			
+							transport.sendMail(mailOptions, function(err, info) {
+								if (err) {
+								  console.log(err)
+								} else {
+								  console.log(info);
+								  res.status(200);
+								  res.json({
+									"message" : "Email sent successfully!"
+								  });
+								}
+							});
+						  
+						  
+						} else {
+						  sendJSONresponse(res, 404, {
+							"message": "No user found!"
+						  });
+						  return;
+						}
+					});
+				} else {
+				  sendJSONresponse(res, 404, {
+					"message": "No application found!"
+				  });
+				  return;
+				}
+			});
+		} else if (req.body.status_type === 'accepted') {
+			var application_id = mongoose.Types.ObjectId(req.body.application_id);
+			Application.findOne({_id: application_id}, function(err, application){
+				if(err) {
+					console.log(err);
+				}
+
+				if(application) {
+					var user_id = mongoose.Types.ObjectId(application.user_id);
+					User.findOne({_id: user_id}, function(err, user){
+						if(err) {
+						  console.log(err);
+						}
+						if(user) {
+							var mailOptions = {
+								from: 'no-reply@e-residency.com',
+								to: user.email,
+								subject: 'Accepted e-residency application',
+								html: `<p>Dear Sir or Madam,</p>
+									   <p>Your application for e-residency was accepted.</p>
+									   <p>You will be contacted by your chosen embassy within a few weeks.</p>
+									   <p>E-residency team</p>
+									   <p>Email: contact@e-residency.com</p>
+									   <p>Web: <a href="http://localhost:4200/home">www.e-residency.com</a></p>`
+							};
+			
+							transport.sendMail(mailOptions, function(err, info) {
+								if (err) {
+								  console.log(err)
+								} else {
+								  console.log(info);
+								  res.status(200);
+								  res.json({
+									"message" : "Email sent successfully!"
+								  });
+								}
+							});
+						  
+						  
+						} else {
+						  sendJSONresponse(res, 404, {
+							"message": "No user found!"
+						  });
+						  return;
+						}
+					});
+				} else {
+				  sendJSONresponse(res, 404, {
+					"message": "No application found!"
+				  });
+				  return;
+				}
+			});
+		} else {
+			console.log('Processing');
+		}
+
 		res.status(200);
 		res.json({
 			"message" : "Application status created successfully"
