@@ -1,5 +1,7 @@
 var mongoose = require('mongoose');
 var Card = mongoose.model('Card');
+var Application = mongoose.model('Application');
+var Details = mongoose.model('Details');
 
 var sendJSONresponse = function(res, status, content) {
   res.status(status);
@@ -24,6 +26,37 @@ module.exports.getAll = function(req, res) {
         if(err) { res.status(500).json(err); return; };
         res.status(200).json(doc);
     });
+};
+
+module.exports.getUserCard = function(req, res) {
+	
+	if(!req.query.user_id) {
+		sendJSONresponse(res, 400, {
+		  "message": "All fields required"
+		});
+		return;
+	}
+	var u_id = mongoose.Types.ObjectId(req.query.user_id);
+	
+	Application.find({user_id: u_id})
+	.limit(1)
+	.sort({ _id: -1 })
+	.exec(function (err, applications) {
+        if(err) { res.status(500).json(err); return; };
+		
+		Details.findOne({application_id: applications[0]._id})
+		.exec(function (err, details) {
+			if(err) { res.status(500).json(err); return; };
+			
+			Card.findOne()
+			.exec(function (err, card) {
+				if(err) { res.status(500).json(err); return; };
+				let response = {details, card};
+				res.status(200).json(response);
+			});
+		});
+    });
+	
 };
 
 module.exports.addCard = function(req, res) {
