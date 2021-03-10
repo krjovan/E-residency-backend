@@ -282,6 +282,9 @@ module.exports.addApplicationStatus = function(req, res) {
 								  });
 								}
 							});
+							
+							Card.update({"user_id": mongoose.Types.ObjectId(user._id)}, {"$set": {"active": false}}, {"multi": true}, (err, writeResult) => {});
+							
 							var card = new Card();
 
 							card.card_code = makeid(15);
