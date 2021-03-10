@@ -1,4 +1,5 @@
 var mongoose = require('mongoose');
+var Card = require('../models/card');
 var Application_status = mongoose.model('Application_status');
 var Status = mongoose.model('Status');
 var Application = mongoose.model('Application');
@@ -9,6 +10,16 @@ var sendJSONresponse = function(res, status, content) {
   res.status(status);
   res.json(content);
 };
+
+function makeid(length) {
+   var result           = '';
+   var characters       = '0123456789';
+   var charactersLength = characters.length;
+   for ( var i = 0; i < length; i++ ) {
+      result += characters.charAt(Math.floor(Math.random() * charactersLength));
+   }
+   return result;
+}
 
 module.exports.getAll = function(req, res) {
 	Application_status.find()
@@ -161,13 +172,16 @@ module.exports.addApplicationStatus = function(req, res) {
 		});
 		return;
 	}
-	
+
 	Status.findOne({status_type: req.body.status_type}, function(err, status) {
 		var applicationStatus = new Application_status();
+		var application_status_id = '';
 	
 		applicationStatus.application_id = req.body.application_id;
 		applicationStatus.status_id = status._id;
-		applicationStatus.save();
+		applicationStatus.save(function(err,result) {
+			application_status_id = result.id;
+		});
 		
 		let transport = nodemailer.createTransport({
 			host: 'smtp.mailtrap.io',
@@ -268,8 +282,18 @@ module.exports.addApplicationStatus = function(req, res) {
 								  });
 								}
 							});
-						  
-						  
+							var card = new Card();
+
+							card.card_code = makeid(15);
+							card.issue_date = new Date();
+							var dateNow = new Date();
+							dateNow.setFullYear(dateNow.getFullYear() + 1);
+							card.expire_date = dateNow;
+							card.application_status_id = mongoose.Types.ObjectId(application_status_id);;
+							card.user_id = user._id;
+							card.active = true;
+							card.save();
+													  
 						} else {
 						  sendJSONresponse(res, 404, {
 							"message": "No user found!"

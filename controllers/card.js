@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 var Card = mongoose.model('Card');
+var Application_status = mongoose.model('Application_status');
 var Application = mongoose.model('Application');
 var Details = mongoose.model('Details');
 
@@ -36,31 +37,32 @@ module.exports.getUserCard = function(req, res) {
 		});
 		return;
 	}
+	
 	var u_id = mongoose.Types.ObjectId(req.query.user_id);
 	
-	Application.find({user_id: u_id})
-	.limit(1)
-	.sort({ _id: -1 })
-	.exec(function (err, applications) {
-        if(err) { res.status(500).json(err); return; };
+	Card.findOne({user_id: u_id}, {}, { sort: { 'issue_date' : -1 } }, function(err, card) {
+		if (card == null) {
+			res.status(200).json({});
+			return;
+		}
 		
-		Details.findOne({application_id: applications[0]._id})
-		.exec(function (err, details) {
-			if(err) { res.status(500).json(err); return; };
+		Application_status.findOne({_id: card.application_status_id}, function(err, application_status) {
 			
-			Card.findOne()
-			.exec(function (err, card) {
-				if(err) { res.status(500).json(err); return; };
-				let response = {details, card};
-				res.status(200).json(response);
+			Application.findOne({_id: application_status.application_id}, function(err, application) {
+		
+				Details.findOne({application_id: application._id}, function(err, details) {
+					let response = { details, card };
+					res.status(200).json(response);			
+				});
+
 			});
 		});
-    });
+	});
 	
 };
 
 module.exports.addCard = function(req, res) {
-	if(!req.body.application_status_id) {
+	if(!req.body.application_status_id || !req.body.user_id) {
 		sendJSONresponse(res, 400, {
 		  "message": "All fields required"
 		});
@@ -76,6 +78,7 @@ module.exports.addCard = function(req, res) {
 	dateNow.setFullYear(dateNow.getFullYear() + 1);
 	card.expire_date = dateNow;
 	card.application_status_id = req.body.application_status_id;
+	card.user_id = req.body.user_id;
 	card.active = true;
 	
 	card.save(function(err,result) {
