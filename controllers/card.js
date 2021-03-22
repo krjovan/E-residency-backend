@@ -29,6 +29,27 @@ module.exports.getAll = function(req, res) {
     });
 };
 
+module.exports.getAllCurrent = function(req, res) {
+	Card.aggregate([
+		{ $match:  { expire_date: { $gte: new Date() } }},
+		{
+			$lookup:
+			{
+				from: "users",
+				localField: "user_id",
+				foreignField: "_id",
+				as: "user"
+			}
+		},
+		{ $unwind : "$user" }
+	]).exec( (err, list) => {
+        if (err) throw err;
+		res.status(200);
+		res.json(list);
+    });
+	
+};
+
 module.exports.getUserCard = function(req, res) {
 	
 	if(!req.query.user_id) {
