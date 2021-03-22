@@ -531,7 +531,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/application/delete/603d15f240285d2508b55b2e",
+							"raw": "localhost:8080/application/delete/603d1c7b4ded26081040c442",
 							"host": [
 								"localhost"
 							],
@@ -539,7 +539,7 @@
 							"path": [
 								"application",
 								"delete",
-								"603d15f240285d2508b55b2e"
+								"603d1c7b4ded26081040c442"
 							]
 						}
 					},
@@ -707,7 +707,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"application_id\": \"60400b9e4cc37c27fcae7147\",\r\n    \"status_type\": \"processing\"\r\n}",
+							"raw": "{\r\n    \"application_id\": \"6044db47ff8dfa20e417a5c6\",\r\n    \"status_type\": \"accepted\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -734,7 +734,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/application-status/delete/603d15f240285d2508b55b30",
+							"raw": "localhost:8080/application-status/delete/6048e77af39ed30b400743b6",
 							"host": [
 								"localhost"
 							],
@@ -742,7 +742,7 @@
 							"path": [
 								"application-status",
 								"delete",
-								"603d15f240285d2508b55b30"
+								"6048e77af39ed30b400743b6"
 							]
 						}
 					},
@@ -843,7 +843,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"application_status_id\": \"6044dc01ff8dfa20e417a5ca\"\r\n}",
+							"raw": "{\r\n    \"application_status_id\": \"6044dc01ff8dfa20e417a5ca\",\r\n    \"user_id\": \"60394016b484e128548672f9\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -899,7 +899,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/card/delete/60450a17567f4030ecbac9b7",
+							"raw": "localhost:8080/card/delete/6048e77af39ed30b400743b7",
 							"host": [
 								"localhost"
 							],
@@ -907,7 +907,7 @@
 							"path": [
 								"card",
 								"delete",
-								"60450a17567f4030ecbac9b7"
+								"6048e77af39ed30b400743b7"
 							]
 						}
 					},
@@ -933,6 +933,26 @@
 									"key": "user_id",
 									"value": "60394016b484e128548672f9"
 								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ALL CURRENT",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/card/allCurrent",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"card",
+								"allCurrent"
 							]
 						}
 					},

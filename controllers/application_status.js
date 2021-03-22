@@ -283,19 +283,23 @@ module.exports.addApplicationStatus = function(req, res) {
 								}
 							});
 							
-							Card.update({"user_id": mongoose.Types.ObjectId(user._id)}, {"$set": {"active": false}}, {"multi": true}, (err, writeResult) => {});
-							
-							var card = new Card();
+							Card.update({"user_id": mongoose.Types.ObjectId(user._id)}, {"$set": {"active": false}}, {"multi": true}, 
+								(err, writeResult) => {
+									var card = new Card();
 
-							card.card_code = makeid(15);
-							card.issue_date = new Date();
-							var dateNow = new Date();
-							dateNow.setFullYear(dateNow.getFullYear() + 1);
-							card.expire_date = dateNow;
-							card.application_status_id = mongoose.Types.ObjectId(application_status_id);;
-							card.user_id = user._id;
-							card.active = true;
-							card.save();
+									card.card_code = makeid(15);
+									card.issue_date = new Date();
+									var dateNow = new Date();
+									dateNow.setFullYear(dateNow.getFullYear() + 1);
+									card.expire_date = dateNow;
+									card.application_status_id = mongoose.Types.ObjectId(application_status_id);;
+									card.user_id = user._id;
+									card.active = true;
+									card.save();
+								}
+							);
+							
+							
 													  
 						} else {
 						  sendJSONresponse(res, 404, {
