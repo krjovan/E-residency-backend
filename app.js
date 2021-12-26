@@ -16,7 +16,6 @@ const details = require('./routes/details');
 const application_status = require('./routes/application_status');
 const card = require('./routes/card');
 
-
 const app=express();
 process.env.TZ = 'Europe/Belgrade';
 //konektujemo se na bazu

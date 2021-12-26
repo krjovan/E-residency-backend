@@ -34,7 +34,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"Marko Marković\",\r\n    \"email\": \"marko@gmail.com\",\r\n    \"password\": \"Marko123\"\r\n}",
+							"raw": "{\r\n    \"name\": \"Marko Marković\",\r\n    \"email\": \"marko@gmail.com\",\r\n    \"password\": \"Marko123!\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -62,7 +62,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"kul@gmail.com\",\r\n    \"password\": \"kul123\"\r\n}",
+							"raw": "{\r\n    \"email\": \"marko@gmail.com\",\r\n    \"password\": \"Marko123!\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -89,7 +89,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/users/delete/6028020d6ffeba2aacbfd676",
+							"raw": "localhost:8080/users/delete/61c84fa20bdf632a888e31dc",
 							"host": [
 								"localhost"
 							],
@@ -97,7 +97,7 @@
 							"path": [
 								"users",
 								"delete",
-								"6028020d6ffeba2aacbfd676"
+								"61c84fa20bdf632a888e31dc"
 							]
 						}
 					},
@@ -113,7 +113,7 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDIxZTUzMTVjYWZkMDFiMTRjMDcxNDAiLCJlbWFpbCI6Im1hcmtvQGdtYWlsLmNvbSIsIm5hbWUiOiJNYXJrbyBNYXJrb3ZpxIciLCJyb2xlIjoidXNlciIsImV4cCI6MTYxMzQzODg5NywiaWF0IjoxNjEyODM0MDk3fQ.vQm3_lBR1YFX2nA9fJmtVEgNNkAEDz-yujVh-p1JF9E",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MWM4NTFhYzBiZGY2MzJhODg4ZTMxZGQiLCJlbWFpbCI6Im1hcmtvQGdtYWlsLmNvbSIsIm5hbWUiOiJNYXJrbyBNYXJrb3ZpxIciLCJyb2xlIjoiYWRtaW4iLCJleHAiOjE2NDExMjM1MDQsImlhdCI6MTY0MDUxODcwNH0.3BGwRUwNy7wQQyYoacSOGOFQoCjmRKTgBURbspsl4tI",
 								"type": "text"
 							},
 							{
@@ -148,7 +148,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"role\": \"user\",\r\n    \"newPassword\": \"kul123\",\r\n    \"name\": \"Test testic\",\r\n    \"email\": \"kul@gmail.com\",\r\n    \"salt\": \"f51579104a055345fbc8840a12406735\",\r\n    \"hash\": \"d56bd8c0ceaafc01b4d2b3f5a15ccb0422f8072e0eaf34b2a40e368831d959188f30990702c15a40b1c42bb9d39c3f2cc1fe704304459a4873e8d56a0f043c14\"\r\n}",
+							"raw": "{\r\n    \"role\": \"admin\",\r\n    \"newPassword\": \"Marko123!\",\r\n    \"name\": \"Marko Marković\",\r\n    \"email\": \"marko@gmail.com\",\r\n    \"salt\": \"6595eae9bfb25e63b00340165edc57e2\",\r\n    \"hash\": \"4e98c6086ef1e6d054cf1b39a5acba8672edd1e84bd5da34d080da77ffbd0c12c2514b94559436853d0bbe0febc1d136472a51c2446f47c26c09b5f64f038a58\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -156,7 +156,7 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8080/users/update/6021e5315cafd01b14c07140",
+							"raw": "localhost:8080/users/update/61c851ac0bdf632a888e31dd",
 							"host": [
 								"localhost"
 							],
@@ -164,7 +164,37 @@
 							"path": [
 								"users",
 								"update",
-								"6021e5315cafd01b14c07140"
+								"61c851ac0bdf632a888e31dd"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "USER UPDATE BY ADMIN",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"role\": \"admin\",\r\n    \"name\": \"Marko Marković\",\r\n    \"email\": \"marko@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/users/admin/update/61c851ac0bdf632a888e31dd",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users",
+								"admin",
+								"update",
+								"61c851ac0bdf632a888e31dd"
 							]
 						}
 					},
